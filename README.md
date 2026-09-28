@@ -3,7 +3,7 @@
 **Autor:** Perla Danae Gallardo Vasquez 
 **Materia:** Programación Web  
 **Repositorio:** [https://github.com/PerlaD391/ComponenteVisual](https://github.com/PerlaD391/ComponenteVisual)  
-**Demo en vivo:** [https://tu-usuario.github.io/componente-visual/](https://tu-usuario.github.io/componente-visual/)
+**Demo en vivo:** [https://perlad391.github.io/ComponenteVisual/](https://perlad391.github.io/ComponenteVisual/)
 
 ---
 
