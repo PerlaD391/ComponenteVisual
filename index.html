@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toast JS - Componente Visual</title>
+    <link rel="stylesheet" href="css/componente.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .demo {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .demo h1 {
+            color: #2b2d42;
+            margin-bottom: 8px;
+            font-size: 28px;
+        }
+
+        .demo .subtitulo {
+            color: #6c757d;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .botones {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            padding: 14px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: white;
+        }
+
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .btn:active { transform: translateY(0); }
+
+        .btn-success { background-color: #2a9d8f; }
+        .btn-error { background-color: #e63946; }
+        .btn-warning { background-color: #f4a261; }
+        .btn-info { background-color: #4cc9f0; }
+
+        .seccion-posiciones {
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 2px solid #f0f0f0;
+        }
+
+        .seccion-posiciones h3 {
+            color: #2b2d42;
+            font-size: 15px;
+            margin-bottom: 12px;
+        }
+
+        .botones-posiciones {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .btn-posicion {
+            padding: 8px;
+            background-color: #f1f3f5;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            font-size: 11px;
+            cursor: pointer;
+            color: #495057;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .btn-posicion:hover {
+            background-color: #e9ecef;
+            border-color: #adb5bd;
+        }
+
+        .btn-posicion.activo {
+            background-color: #927dc1;
+            color: white;
+            border-color: #927dc1;
+        }
+
+        .btn-cerrar-todos {
+            margin-top: 20px;
+            width: 100%;
+            padding: 12px;
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-cerrar-todos:hover { background-color: #495057; }
+
+        .info-posicion {
+            margin-top: 15px;
+            font-size: 13px;
+            color: #6c757d;
+        }
+
+        .info-posicion strong {
+            color: #927dc1;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="demo">
+        <h1>Toast JS</h1>
+        <p class="subtitulo">Notificaciones reutilizables en 1 línea de código</p>
+
+        <div class="botones">
+            <button class="btn btn-success" onclick="Toast.exito('¡Operación exitosa!')">
+                ✓ Éxito
+            </button>
+            <button class="btn btn-error" onclick="Toast.error('Algo salió mal')">
+                ✕ Error
+            </button>
+            <button class="btn btn-warning" onclick="Toast.advertencia('Ten cuidado')">
+                ⚠ Advertencia
+            </button>
+            <button class="btn btn-info" onclick="Toast.info('Nueva actualización')">
+                ℹ Información
+            </button>
+        </div>
+
+        <div class="seccion-posiciones">
+            <h3>Cambiar posición</h3>
+            <div class="botones-posiciones" id="botonesPosiciones">
+                <button class="btn-posicion" data-posicion="top-left" onclick="cambiarPosicion('top-left')">↖ Arriba Izq</button>
+                <button class="btn-posicion" data-posicion="top-center" onclick="cambiarPosicion('top-center')">↑ Arriba Centro</button>
+                <button class="btn-posicion" data-posicion="top-right" onclick="cambiarPosicion('top-right')">↗ Arriba Der</button>
+                <button class="btn-posicion" data-posicion="bottom-left" onclick="cambiarPosicion('bottom-left')">↙ Abajo Izq</button>
+                <button class="btn-posicion" data-posicion="bottom-center" onclick="cambiarPosicion('bottom-center')">↓ Abajo Centro</button>
+                <button class="btn-posicion" data-posicion="bottom-right" onclick="cambiarPosicion('bottom-right')">↘ Abajo Der</button>
+            </div>
+            <p class="info-posicion">
+                Posición actual: <strong id="posicionActualTexto">top-right</strong>
+            </p>
+        </div>
+
+        <button class="btn-cerrar-todos" onclick="Toast.cerrarTodos()">
+            Cerrar todos los toasts
+        </button>
+    </div>
+
+    <script src="js/componente.js"></script>
+    <script>
+        function cambiarPosicion(posicion) {
+            Toast.setPosicion(posicion);
+
+            Toast.mostrar({
+                tipo: 'info',
+                titulo: 'Posición cambiada',
+                mensaje: 'Los siguientes toasts aparecerán aquí.',
+                posicion: posicion,
+                duracion: 2500
+            });
+
+            document.getElementById('posicionActualTexto').textContent = posicion;
+
+            const botones = document.querySelectorAll('.btn-posicion');
+            botones.forEach(function (btn) {
+                btn.classList.remove('activo');
+                if (btn.getAttribute('data-posicion') === posicion) {
+                    btn.classList.add('activo');
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(function () {
+                Toast.exito('¡Bienvenido a Toast JS!', {
+                    titulo: 'Demo activada',
+                    duracion: 4000
+                });
+            }, 500);
+        });
+    </script>
+</body>
+</html>
