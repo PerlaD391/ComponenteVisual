@@ -131,17 +131,26 @@ Toast.cerrarTodos();
 
 ## 📸 Capturas de pantalla
 
-### Captura 1: Toast de éxito
-![Toast de éxito](img/captura1.png)
+### Captura 1:
+![](img/captura1.png)
 
-### Captura 2: Toast de error
-![Toast de error](img/captura2.png)
+### Captura 2:
+![](img/captura2.png)
 
-### Captura 3: Múltiples toasts en diferentes posiciones
-![Múltiples toasts](img/captura3.png)
+### Captura 3: 
+![](img/captura3.png)
 
-### Captura 4: Consola mostrando resultados
-![Consola](img/captura4.png)
+### Captura 4: 
+![](img/captura4.png)
+
+### Captura 5: 
+![](img/captura5.png)
+
+### Captura 6: 
+![](img/captura6.png)
+
+### Captura 7: 
+![](img/captura7.png)
 
 ---
 
